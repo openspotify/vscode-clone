@@ -1,0 +1,19 @@
+:root[data-theme='dark'] {
+  --background-color: #1e1e1e;
+  --text-color: #d4d4d4;
+  --sidebar-background: #252526;
+  --border-color: #333;
+  --editor-background: #1e1e1e;
+  --statusbar-background: #007acc;
+  --statusbar-text-color: white;
+}
+
+:root[data-theme='light'] {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --sidebar-background: #f3f3f3;
+  --border-color: #ddd;
+  --editor-background: #ffffff;
+  --statusbar-background: #007acc;
+  --statusbar-text-color: white;
+}
