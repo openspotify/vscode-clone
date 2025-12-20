@@ -1,0 +1,9 @@
+{
+  "name": "crafting_profile",
+  "version": "1.0",
+  "description": "A profile for crafting tasks in Mindcraft.",
+  "parameters": {
+    "allow_insecure_coding": true,
+    "max_messages": 200
+  }
+}
