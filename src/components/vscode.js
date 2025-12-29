@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {
   Switch, Route, useLocation, withRouter,
 } from 'react-router-dom';
-import { ResizableBox } from 'react-resizable';
 import FilesPane from './filespane';
 import LeftNav from './leftnav';
 import BottomBar from './bottombar';
@@ -12,6 +11,7 @@ import SearchPane from './searchpane';
 import ExtensionPane from './extensionpane';
 import GitPane from './gitpane';
 import DebuggerPane from './debuggerpane';
+import ResizablePane from './resizablepane';
 
 // import LeftNav from './leftnav'
 // import ThemeContext from 'Components/themecontext'
@@ -28,11 +28,6 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-`;
-const CustomHandle = styled.div`
-  height: 100%;
-  cursor: col-resize;
-  width: 2px;
 `;
 const VSCode = ({ history }) => {
   const [File, setFile] = useState('html');
@@ -55,23 +50,8 @@ const VSCode = ({ history }) => {
       setWidth(0);
       setInitWidth(0);
     }
-  }, [history]);
+  }, [history, currentLocation.pathname]);
 
-  history.listen((location) => {
-    if (innerWidth < 500 && location.pathname.slice(1) !== '') {
-      setWidth(148);
-      setInitWidth(150);
-    } else if (innerWidth < 500 && location.pathname.slice(1) === '') {
-      setWidth(0);
-      setInitWidth(2);
-    } else if (innerWidth > 500 && location.pathname.slice(1) !== '') {
-      setWidth(238);
-      setInitWidth(240);
-    } else {
-      setWidth(0);
-      setInitWidth(0);
-    }
-  });
   const onResize = (event, { size }) => {
     setWidth(size.width);
   };
@@ -83,68 +63,33 @@ const VSCode = ({ history }) => {
         <Route path="/">{null}</Route>
 
         <Route path="/files" exact>
-          <ResizableBox
-            onResize={onResize}
-            style={{ background: 'black', display: 'flex' }}
-            width={initWidth}
-            // height={100}
-            handle={<CustomHandle />}
-            handleSize={[8, 8]}
-          >
+          <ResizablePane onResize={onResize} width={initWidth}>
             <FilesPane
               paneWidth={width}
               openFile={File}
               toggleCurrentFile={setFile}
             />
-          </ResizableBox>
+          </ResizablePane>
         </Route>
         <Route path="/search" exact>
-          <ResizableBox
-            onResize={onResize}
-            style={{ background: 'black', display: 'flex' }}
-            width={initWidth}
-            // height={100}
-            handle={<CustomHandle />}
-            handleSize={[8, 8]}
-          >
+          <ResizablePane onResize={onResize} width={initWidth}>
             <SearchPane paneWidth={width} />
-          </ResizableBox>
+          </ResizablePane>
         </Route>
         <Route path="/git" exact>
-          <ResizableBox
-            onResize={onResize}
-            style={{ background: 'black', display: 'flex' }}
-            width={initWidth}
-            // height={100}
-            handle={<CustomHandle />}
-            handleSize={[8, 8]}
-          >
+          <ResizablePane onResize={onResize} width={initWidth}>
             <GitPane paneWidth={width} />
-          </ResizableBox>
+          </ResizablePane>
         </Route>
         <Route path="/debugger" exact>
-          <ResizableBox
-            onResize={onResize}
-            style={{ background: 'black', display: 'flex' }}
-            width={initWidth}
-            // height={100}
-            handle={<CustomHandle />}
-            handleSize={[8, 8]}
-          >
+          <ResizablePane onResize={onResize} width={initWidth}>
             <DebuggerPane paneWidth={width} />
-          </ResizableBox>
+          </ResizablePane>
         </Route>
         <Route path="/extension" exact>
-          <ResizableBox
-            onResize={onResize}
-            style={{ background: 'black', display: 'flex' }}
-            width={initWidth}
-            // height={100}
-            handle={<CustomHandle />}
-            handleSize={[8, 8]}
-          >
+          <ResizablePane onResize={onResize} width={initWidth}>
             <ExtensionPane paneWidth={width} />
-          </ResizableBox>
+          </ResizablePane>
         </Route>
 
         <CodeArea
